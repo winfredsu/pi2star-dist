@@ -1,0 +1,83 @@
+<div class="content-sm container">
+	<div class="row">
+		<div class="col-lg-9 col-lg-offset-2">
+			<div #titleWrapper class="product-title" [style.min-height.px]="titleMinHeight">
+				<h1 #title [affix]="60" affixTop="97">NVPEval Platform <small>REV0</small></h1>
+			</div>
+			<div #intro class="row product-intro margin-b-30 margin-t-20">
+				<div class="col-md-7 platform-carousel">
+					<div id="carouselPlatform" class="owl-carousel owl-theme margin-b-10">
+						<div class="item">
+							<img class="img-responsive" src="assets/platform/NVPEval.jpg" alt="NVPEval">
+						</div>
+						<div class="item">
+							<img class="img-responsive" src="assets/platform/PMU.jpg" alt="Power Management & Clock Management Daughter Board">
+						</div>
+						<div class="item">
+							<img class="img-responsive" src="assets/platform/NVP.jpg" alt="Nonvolatile Processor Daughter Board">
+						</div>
+						<div class="item">
+							<img class="img-responsive" src="assets/platform/LED.jpg" alt="Switch & LED Daughter Board">
+						</div>
+					</div>
+
+					<!--<div id="carouselPlatform" class="carousel slide margin-b-10" data-ride="carousel">-->
+						<!--<div class="carousel-inner" role="listbox">-->
+							<!--<div class="item active">-->
+								<!--<img class="img-responsive" src="assets/platform/01.jpg" alt="NVPEval Front">-->
+							<!--</div>-->
+							<!--<div class="item">-->
+								<!--<img class="img-responsive" src="assets/platform/01.jpg" alt="NVPEval Front">-->
+							<!--</div>-->
+							<!--<div class="item">-->
+								<!--<img class="img-responsive" src="assets/platform/01.jpg" alt="NVPEval Front">-->
+							<!--</div>-->
+							<!--<div class="item">-->
+								<!--<img class="img-responsive" src="assets/platform/01.jpg" alt="NVPEval Front">-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+				</div>
+				<div class="col-md-5">
+					<p class="margin-t-20">The NVPEval is a fully-integrated and easy-to-use nonvolatile processor development board. It allows developers to take full advantage of a ferroelectric nonvolatile processor by simply plugging in an energy harvester such as photovoltaic cell. Multiple communication and debugging interfaces are featured on the board. Whenever you've got an idea, NVPEval is ready for your prototype! </p>
+				</div>
+				<div class="col-md-7 hidden-sm hidden-xs">
+					<div class="row thumbs">
+						<a class="col-xs-3" (click)="goToSlide(0)">
+							<img class="img-responsive img-thumbnail" src="assets/platform/NVPEval.jpg">
+						</a>
+						<a class="col-xs-3" (click)="goToSlide(1)">
+							<img class="img-responsive img-thumbnail" src="assets/platform/PMU.jpg">
+						</a>
+						<a class="col-xs-3" (click)="goToSlide(2)">
+							<img class="img-responsive img-thumbnail" src="assets/platform/NVP.jpg">
+						</a>
+						<a class="col-xs-3" (click)="goToSlide(3)">
+							<img class="img-responsive img-thumbnail" src="assets/platform/LED.jpg">
+						</a>
+					</div>  
+				</div>
+				<div class="col-md-5">
+					<div class="">
+						<button (click)="openDialog()" class="btn-theme btn-white-bg btn-block text-uppercase">Buy Now</button>
+						<button routerLink="/platform/getting-started" class="btn-theme btn-color1-bg btn-block text-uppercase">Get Started</button>
+					</div>                                           
+				</div>
+			</div>
+			<div class="product-nav" [style.min-height.px]="navMinHeight">
+				<div #nav class="nav-wrapper" [style.width.px]="navWidth" [affix]="navAffix" affixTop="{{navTop}}">
+					<ul class="nav nav-tabs">
+						<li routerLinkActive="active"><a routerLink="/platform/overview">OVERVIEW</a></li>
+						<li routerLinkActive="active"><a routerLink="/platform/techspecs">TECH SPECS</a></li>
+						<li routerLinkActive="active"><a routerLink="/platform/getting-started">GETTING STARTED</a></li>
+						<li routerLinkActive="active"><a routerLink="/platform/downloads">DOWNLOADS</a></li>
+					</ul>
+					<div class="shadow"></div>
+				</div>
+			</div>
+			<div class="plain-content">
+				<router-outlet></router-outlet>								
+			</div>
+		</div>
+	</div>
+</div>

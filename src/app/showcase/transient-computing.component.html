@@ -1,0 +1,18 @@
+<div class="content-sm container plain-content">
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<h1>Transient Computing</h1>
+			<div *ngIf="!ipFromCN" class="embed-responsive embed-responsive-16by9 margin-b-30">
+    			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/UaXRcAYKol8"></iframe>
+			</div>
+			<div *ngIf="ipFromCN" class="embed-responsive embed-responsive-16by9 margin-b-30">
+    			<iframe class="embed-responsive-item" src="https://www.bilibili.com/html/html5player.html?aid=14427793&cid=23539109&as_wide=1&autoplay=1&showinfo=0"></iframe>
+			</div>
+			<p>Embedded systems powered by energy harvesting has traditionally been coupled with large energy storage elements (rechargeable battery, supercapacitor, etc.), due to the erratic nature of energy source. Such system has disadvantages of large size, high leakage current and high maintenance cost. </p>
+			<p>Directly powering with energy harvester can help us get rid of energy storage and conversion circuits. This has pushed forward a new task execution paradigm -- <strong>transient computing</strong> -- where computation is performed only when power is available. While transient computing allows energy harvesting systems to have smaller size, lower cost and higher efficiency than traditional ones, it imposes tough requirements on the computing devices: <strong>they must make continuous computational progress using transient power supply.</strong></p>  
+			<p>This demo video shows how nonvolatile processor enables reliable and efficient transient computing. An antenna collects power at 30cm distance from an RF source (3W, which is similar to a Wi-Fi router), and powers up a processor running pattern matching program via an AC-DC converter. The percentage of the program progress is shown on the LCD screen.</p>
+			<p>First, a volatile processor is tested. At the beginning, it operates properly using the harvested RF power. However, if an obstacle is placed between the energy source and the harvester, or the antenna is pointed to a different direction, the volatile processor will reset and all progress will be lost because of power failure. </p>
+			<p>In contrast, nonvolatile processor can guarantee continuous processing in this scenario. When a power interruption is about to come, it saves system states into nonvolatile flip-flops. And when RF power is resumed, it continues to execute right from the interrupted point. In this way, nonvolatile processor makes the behavior of transiently powered systems continuous and reliable. </p> 
+		</div>
+	</div>
+</div>

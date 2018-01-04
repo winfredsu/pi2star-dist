@@ -1,0 +1,4 @@
+ng build --aot --prod --build-optimizer
+git add .
+git commit -m "a new build"
+git push

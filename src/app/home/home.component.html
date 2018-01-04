@@ -1,0 +1,56 @@
+<div class="content-top">
+	<div class="carousel-home full-screen" [style.height.px]="height">
+		<!-- <img class="img-responsive" src="./img/1920x1080/02.jpg" alt="Slider Image"> -->
+		<div class="container">
+				<div class="carousel-centered">
+						<div class="margin-b-30">
+								<h1 class="carousel-title">打造智慧机器 助力工业升级 <br></h1>
+						</div>
+						<!-- <a href="https://youtu.be/y45Fa25un4U" target="_blank" class="hidden-xs btn-theme btn-theme-sm btn-white-brd carousel-btn text-uppercase"><i class="fa fa-play" aria-hidden="true"></i> Nonvolatile Processor in 1 minute</a> -->
+						<a (click)="openDialog()" class="visible-xs-inline btn-theme btn-theme-sm btn-white-brd carousel-btn text-uppercase"><i class="fa fa-play" aria-hidden="true"></i> 一分钟了解集能芯成</a>
+						<a (click)="openDialog()" class="hidden-xs btn-theme btn-theme-sm btn-white-brd carousel-btn text-uppercase"><i class="fa fa-play" aria-hidden="true"></i> 一分钟了解集能芯成</a>
+				</div>
+		</div>
+	</div>
+</div>
+<!--========== SLIDER ==========-->
+
+<!--========== PAGE LAYOUT ==========-->
+<!-- Intro -->
+<div class="bg-color-sky-light">
+		<div class="content-lg container">
+				<div class="intro-title margin-b-60">
+						<p>WELCOME TO NVLABS</p>
+						<h1>Create Energy-Efficient IoT Solutions <br>With Nonvolatile Processors </h1>
+				</div>
+				<!-- Masonry Grid -->
+				<div class="row">
+						<div class="intro-item col-xs-12 col-sm-6 col-md-6">
+								<div class="margin-b-30">
+									<img class="img-responsive" src="assets/500x500/platform.png" alt="Development Platform">
+								</div>
+								<h2 class="margin-b-5">NVPEval Platform</h2>
+								<p>A cost-effective and fully-integrated rapid prototyping platform taking full advantage of a ferroelectric nonvolatile processor</p>
+								<a routerLink="/platform" class="btn-theme btn-theme-xs btn-white-bg text-uppercase">Details</a>                    
+						</div>
+						<div class="intro-item col-xs-12 col-sm-6 col-md-6">
+								<div class="margin-b-30">
+										<img class="img-responsive" src="assets/500x500/simulator.png" alt="NVPSim Simulator">
+								</div>
+								<h2 class="margin-b-5">Gem5-NVP Simulator</h2>
+								<p>A modular simulation platform enabling fast-but-accurate evaluation of nonvolatile processor, especially for energy-aware systems</p>
+								<a routerLink="/simulator" class="btn-theme btn-theme-xs btn-white-bg text-uppercase">Details</a>
+						</div>
+				</div>
+				<!-- End Masonry Grid -->
+		</div>
+</div>
+<!-- End Intro -->
+
+<div>
+	<nvlabs-showcase></nvlabs-showcase>
+</div>
+
+<div class="bg-color-sky-light">
+	<nvlabs-explore></nvlabs-explore>
+<div>

@@ -1,0 +1,213 @@
+<h2>
+<a id="user-content-example-simulating-a-system-with-two-threshold-energy-state-machine" class="anchor" href="#example-simulating-a-system-with-two-threshold-energy-state-machine" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example: Simulating a System with Two-Threshold Energy State Machine</h2>
+<p>This page will introduce an example on how to simulate a nonvolatile system with a two-threshold energy state machine using gem5-NVP. To get the example more simple, we will use AtomicSimpleCPU as the cpu model, and ignore how the back-up module restores the value in the memory system. THU-1010n is the real-world prototype of such system. We will begin by introducing THU-1010n first.</p>
+<h2>
+<a id="user-content-introduction-to-thu-1010n" class="anchor" href="#introduction-to-thu-1010n" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction to THU-1010n</h2>
+<p>THU-1010n is a single-cycle nonvolatile MCU prototype fabricated using .13um CMOS-ferroelectric hybrid process. It has 8KB SRAM as memory together with a 1607-bit FeFF nonvolatile storage to ensure critical data can be stored in case of lacking power. Below is some properties of THU-1010n.</p>
+<p>In this simulation, we assume that the micro processor works at 1MHz with a 160uW active power. At that frequency, the MCU uses 7 cycles to store data and fall into sleep mode and uses 3 cycles to wake up from sleep. We would simplify the state controller of THU-1010n in this simulation. Two thresholds of energy remained in the capacitor decides when the system will switch from power-off to power-on and from power-on to power-off.</p>
+<h2>
+<a id="user-content-creating-two-threshold-energy-state-machine" class="anchor" href="#creating-two-threshold-energy-state-machine" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating Two-Threshold Energy State Machine</h2>
+<p>We need to create a two-threshold energy state machine mentioned above. All instances of energy state machine in gem5-NVP is derived from BaseEnergySM. Gem5-NVP uses SimpleEnergySM as its default state machine, and that state machine cannot meet our demand in this case. Therefore, we are going to derive another state machine class and override "update" method to achieve a two-thres behavior.</p>
+<h3>
+<a id="user-content-python-side" class="anchor" href="#python-side" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Python Side</h3>
+<p>Each SimObject has a corresponding class on the python side, and so does our state machine class. On the python side, we need to inherit all the parameters from BaseEnergySM class and add two parameters named "thres_low" and "thres_high" furthermore. In this way, we can control the threshold from simulating scripts. Below is the code on python side:</p>
+<p><b>src/engy/TwoThresSM.py</b></p>
+<div class="highlight highlight-source-python"><pre><span class="pl-k">from</span> m5.SimObject <span class="pl-k">import</span> SimObject
+<span class="pl-k">from</span> BaseEnergySM <span class="pl-k">import</span> BaseEnergySM
+<span class="pl-k">from</span> m5.params <span class="pl-k">import</span> <span class="pl-k">*</span>
+<span class="pl-k">from</span> m5.proxy <span class="pl-k">import</span> <span class="pl-k">*</span>
+
+<span class="pl-k">class</span> <span class="pl-en">TwoThresSM</span>(<span class="pl-e">BaseEnergySM</span>):
+    <span class="pl-c1">type</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>TwoThresSM<span class="pl-pds">'</span></span>
+    cxx_header <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>engy/two_thres.hh<span class="pl-pds">"</span></span>
+    thres_high <span class="pl-k">=</span> Param.Float(Parent.thres_high, <span class="pl-s"><span class="pl-pds">"</span>high threshold of energy state machine<span class="pl-pds">"</span></span>)
+    thres_low <span class="pl-k">=</span> Param.Float(Parent.thres_low, <span class="pl-s"><span class="pl-pds">"</span>low threshold of energy state machine<span class="pl-pds">"</span></span>)</pre></div>
+<h3>
+<a id="user-content-cpp-side" class="anchor" href="#cpp-side" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CPP Side</h3>
+<p>When creating new SimObject, there are some formality sakes that need to be implemented in order to pass the python parameters to CPP code. We don't need to fully understand those codes, and we should only focus on the critical part. Below is the CPP code for the class:</p>
+<p><b>src/engy/two_thres.hh</b></p>
+<div class="highlight highlight-source-c++"><pre>#<span class="pl-k">ifndef</span> GEM5_TWO_THRES_HH
+#<span class="pl-k">define</span> <span class="pl-en">GEM5_TWO_THRES_HH</span>
+
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">"</span>state_machine.hh<span class="pl-pds">"</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">"</span>params/TwoThresSM.hh<span class="pl-pds">"</span></span>
+
+<span class="pl-k">class</span> <span class="pl-en">TwoThresSM</span> : <span class="pl-k">public</span> <span class="pl-en">BaseEnergySM</span>
+{{'{'}}
+
+<span class="pl-k">public:</span>
+    <span class="pl-k">typedef</span> TwoThresSMParams Params;
+    <span class="pl-k">const</span> Params *<span class="pl-en">params</span>() <span class="pl-k">const</span>
+    {{'{'}}
+        <span class="pl-k">return</span> <span class="pl-k">reinterpret_cast</span>&lt;<span class="pl-k">const</span> Params *&gt;(_params);
+    }
+    <span class="pl-en">TwoThresSM</span>(<span class="pl-k">const</span> Params *p);
+    <span class="pl-en">~TwoThresSM</span>() {{'{'}}}
+    <span class="pl-k">virtual</span> <span class="pl-k">void</span> <span class="pl-en">init</span>();
+    <span class="pl-k">virtual</span> <span class="pl-k">void</span> <span class="pl-en">update</span>(<span class="pl-k">double</span> _energy);
+
+    <span class="pl-k">enum</span> State {{'{'}}
+        STATE_INIT = <span class="pl-c1">0</span>,
+        STATE_POWEROFF = <span class="pl-c1">1</span>,
+        STATE_POWERON = <span class="pl-c1">2</span>
+    };
+
+    <span class="pl-k">enum</span> MsgType {{'{'}}
+        CONSUMEENERGY = <span class="pl-c1">0</span>,
+        POWEROFF = <span class="pl-c1">1</span>,
+        POWERON = <span class="pl-c1">2</span>
+    };
+
+<span class="pl-k">protected:</span>
+    State state;
+    <span class="pl-k">double</span> thres_high;
+    <span class="pl-k">double</span> thres_low;
+
+};
+#<span class="pl-k">endif</span> <span class="pl-c"><span class="pl-c">//</span>GEM5_TWO_THRES_HH</span></pre></div>
+<p><b>src/engy/two_thres.cc</b></p>
+<div class="highlight highlight-source-c++"><pre>#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">"</span>two_thres.hh<span class="pl-pds">"</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">"</span>debug/EnergyMgmt.hh<span class="pl-pds">"</span></span>
+
+<span class="pl-en">TwoThresSM::TwoThresSM</span>(<span class="pl-k">const</span> Params *p)
+    : BaseEnergySM(p), state(TwoThresSM::State::STATE_INIT),
+      thres_high(p-&gt;thres_high), thres_low(p-&gt;thres_low)
+{{'{'}}
+
+}
+
+<span class="pl-k">void</span> <span class="pl-en">TwoThresSM::init</span>()
+{{'{'}}
+    state = TwoThresSM::State::STATE_POWEROFF;
+    EnergyMsg msg;
+    msg.<span class="pl-smi">val</span> = <span class="pl-c1">0</span>;
+    msg.<span class="pl-smi">type</span> = MsgType::POWEROFF;
+    <span class="pl-c1">broadcastMsg</span>(msg);
+}
+
+<span class="pl-k">void</span> <span class="pl-en">TwoThresSM::update</span>(<span class="pl-k">double</span> _energy)
+{{'{'}}
+    EnergyMsg msg;
+    msg.<span class="pl-smi">val</span> = <span class="pl-c1">0</span>;
+
+    <span class="pl-k">if</span> (state == STATE_INIT) {{'{'}}
+        state = STATE_POWERON;
+    } <span class="pl-k">else</span> <span class="pl-k">if</span> (state == STATE_POWERON &amp;&amp; _energy &lt; thres_low) {{'{'}}
+        <span class="pl-c1">DPRINTF</span>(EnergyMgmt, <span class="pl-s"><span class="pl-pds">"</span>State change: on-&gt;off state=%d, _energy=%lf, thres_low=%lf<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, state, _energy, thres_low);
+        state = STATE_POWEROFF;
+        msg.<span class="pl-smi">type</span> = MsgType::POWEROFF;
+        <span class="pl-c1">broadcastMsg</span>(msg);
+    } <span class="pl-k">else</span> <span class="pl-k">if</span> (state == STATE_POWEROFF &amp;&amp; _energy &gt; thres_high) {{'{'}}
+        <span class="pl-c1">DPRINTF</span>(EnergyMgmt, <span class="pl-s"><span class="pl-pds">"</span>State change: off-&gt;on state=%d, _energy=%lf, thres_high=%lf<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, state, _energy, thres_high);
+        state = STATE_POWERON;
+        msg.<span class="pl-smi">type</span> = MsgType::POWERON;
+        <span class="pl-c1">broadcastMsg</span>(msg);
+    }
+
+}
+
+TwoThresSM *
+<span class="pl-en">TwoThresSMParams::create</span>()
+{{'{'}}
+    <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-c1">TwoThresSM</span>(<span class="pl-c1">this</span>);
+}</pre></div>
+<h3>
+<a id="user-content-sconscript" class="anchor" href="#sconscript" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SConscript</h3>
+<p>Next we should add something to SConscript to tell scons about our changes.</p>
+<p><b>src/engy/SConscript</b></p>
+<div class="highlight highlight-source-python"><pre>Import(<span class="pl-s"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span>)
+
+Source(<span class="pl-s"><span class="pl-pds">'</span>energy_mgmt.cc<span class="pl-pds">'</span></span>)
+Source(<span class="pl-s"><span class="pl-pds">'</span>energy_port.cc<span class="pl-pds">'</span></span>)
+Source(<span class="pl-s"><span class="pl-pds">'</span>energy_object.cc<span class="pl-pds">'</span></span>)
+Source(<span class="pl-s"><span class="pl-pds">'</span>state_machine.cc<span class="pl-pds">'</span></span>)
+Source(<span class="pl-s"><span class="pl-pds">'</span>two_thres.cc<span class="pl-pds">'</span></span>)
+
+SimObject(<span class="pl-s"><span class="pl-pds">'</span>EnergyMgmt.py<span class="pl-pds">'</span></span>)
+SimObject(<span class="pl-s"><span class="pl-pds">'</span>BaseEnergySM.py<span class="pl-pds">'</span></span>)
+SimObject(<span class="pl-s"><span class="pl-pds">'</span>SimpleEnergySM.py<span class="pl-pds">'</span></span>)
+SimObject(<span class="pl-s"><span class="pl-pds">'</span>TwoThresSM.py<span class="pl-pds">'</span></span>)
+
+DebugFlag(<span class="pl-s"><span class="pl-pds">'</span>EnergyMgmt<span class="pl-pds">'</span></span>)</pre></div>
+<h2>
+<a id="user-content-implementing-the-actions-taken-when-state-has-changed" class="anchor" href="#implementing-the-actions-taken-when-state-has-changed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Implementing the Actions Taken When State Has Changed</h2>
+<p>Next, we should tell other parts of the system what they should do when the system's state changes. We are using AtomicSimpleCPU in the simulation, and in that CPU module all the processes of the system are triggered by AtomicSimpleCPU::tick() method. Since we don't care about details like how back-up module store the values in SRAM, we can only implement actions of AtomicSimpleCPU in case of state changes. We assume that all the critical data can be properly saved and restored when power-off and power-on occur, so the process of the CPU seems to be "delayed" when the system goes from power-on to power-off. Therefore, the action taken when receiving power-off message is descheduling the "tick" event, the one taken when receiving power-on message is scheduling "tick" event. In the following code, we carefully take restore/back-up time into consideration.</p>
+<p><b>src/cpu/simple/atomic.cc</b></p>
+<div class="highlight highlight-source-c++"><pre>
+...
+
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">"</span>engy/two_thres.hh<span class="pl-pds">"</span></span>
+
+...
+
+<span class="pl-k">void</span>
+<span class="pl-en">AtomicSimpleCPU::tick</span>()
+{{'{'}}
+    <span class="pl-c1">DPRINTF</span>(SimpleCPU, <span class="pl-s"><span class="pl-pds">"</span>Tick<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>);
+
+    <span class="pl-c1">consumeEnergy</span>(<span class="pl-c1">16</span>);
+
+    ...
+
+}
+
+...
+
+<span class="pl-k">int</span>
+<span class="pl-en">AtomicSimpleCPU::handleMsg</span>(<span class="pl-k">const</span> EnergyMsg &amp;msg)
+{{'{'}}
+    <span class="pl-k">int</span> rlt = <span class="pl-c1">1</span>;
+    <span class="pl-c1">DPRINTF</span>(EnergyMgmt, <span class="pl-s"><span class="pl-pds">"</span>handleMsg called at %lu, msg.type=%d<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, <span class="pl-c1">curTick</span>(), msg.<span class="pl-smi">type</span>);
+    <span class="pl-k">switch</span>(msg.<span class="pl-smi">type</span>){{'{'}}
+        <span class="pl-c1">case</span> (<span class="pl-k">int</span>) TwoThresSM::MsgType::POWEROFF:
+            <span class="pl-k">if</span> (tickEvent.<span class="pl-c1">scheduled</span>())
+                <span class="pl-c1">consumeEnergy</span>(<span class="pl-c1">160</span>*<span class="pl-c1">7</span>);
+                <span class="pl-c1">deschedule</span>(tickEvent);
+            <span class="pl-k">break</span>;
+        <span class="pl-c1">case</span> (<span class="pl-k">int</span>) TwoThresSM::MsgType::POWERON:
+            <span class="pl-k">if</span> (!tickEvent.<span class="pl-c1">scheduled</span>())
+                <span class="pl-c1">consumeEnergy</span>(<span class="pl-c1">160</span>*<span class="pl-c1">3</span>);
+                <span class="pl-c1">schedule</span>(tickEvent, <span class="pl-c1">curTick</span>() + <span class="pl-c1">3</span> * <span class="pl-c1">clockPeriod</span>());
+            <span class="pl-k">break</span>;
+        <span class="pl-k">default</span>:
+            rlt = <span class="pl-c1">0</span>;
+    }
+    <span class="pl-k">return</span> rlt;
+}
+
+...</pre></div>
+<h2>
+<a id="user-content-changing-simulating-scripts" class="anchor" href="#changing-simulating-scripts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changing Simulating Scripts</h2>
+<p>Make some changes to simulating scripts, and link our energy state machine to the energy management module. Also, we can add some options to scripts to make simulation easier.</p>
+<p><b>configs/example/se_engy.py</b></p>
+<div class="highlight highlight-source-python"><pre><span class="pl-c1">...</span>
+system.energy_mgmt <span class="pl-k">=</span> EnergyMgmt(<span class="pl-v">path_energy_profile</span> <span class="pl-k">=</span> options.energy_profile,
+                                <span class="pl-v">energy_time_unit</span> <span class="pl-k">=</span> options.energy_time_unit,
+                                <span class="pl-v">energy_modules</span> <span class="pl-k">=</span> options.energy_modules,
+                                <span class="pl-v">state_machine</span> <span class="pl-k">=</span> TwoThresSM(<span class="pl-v">thres_high</span> <span class="pl-k">=</span> options.thres_high,
+                <span class="pl-v">thres_low</span> <span class="pl-k">=</span> options.thres_low))
+<span class="pl-c1">...</span></pre></div>
+<p><b>configs/common/Options.py</b></p>
+<div class="highlight highlight-source-python"><pre><span class="pl-c1">...</span>
+<span class="pl-k">def</span> <span class="pl-en">addEngyOptions</span>(<span class="pl-smi">parser</span>):
+    <span class="pl-c"><span class="pl-c">#</span> Energy Management Options</span>
+
+<span class="pl-c1">...</span>
+
+    parser.add_option(<span class="pl-s"><span class="pl-pds">"</span>--thres-high<span class="pl-pds">"</span></span>, <span class="pl-v">type</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>float<span class="pl-pds">"</span></span>, <span class="pl-v">default</span><span class="pl-k">=</span><span class="pl-c1">100</span>,
+                      <span class="pl-v">help</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>high threshold of energy state machine<span class="pl-pds">"</span></span>)
+    parser.add_option(<span class="pl-s"><span class="pl-pds">"</span>--thres-low<span class="pl-pds">"</span></span>, <span class="pl-v">type</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>float<span class="pl-pds">"</span></span>, <span class="pl-v">default</span><span class="pl-k">=</span><span class="pl-c1">50</span>,
+                      <span class="pl-v">help</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>low threshold of energy state machine<span class="pl-pds">"</span></span>)
+
+<span class="pl-c1">...</span></pre></div>
+<h2>
+<a id="user-content-simulation" class="anchor" href="#simulation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Simulation</h2>
+<h3>
+<a id="user-content-build-system" class="anchor" href="#build-system" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build System</h3>
+<p>From the gem5 repository, run:</p>
+<div class="highlight highlight-source-shell"><pre>scons build/ARM/gem5.debug</pre></div>
+<h3>
+<a id="user-content-run-simulation" class="anchor" href="#run-simulation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Run Simulation</h3>
+<p>From the gem5 repository, run:</p>
+<div class="highlight highlight-source-shell"><pre>build/ARM/gem5.debug --debug-flags=EnergyMgmt --debug-file=a.out configs/example/se_engy.py -c tests/test-progs/hello/bin/arm/linux/hello --cpu-clock=<span class="pl-s"><span class="pl-pds">'</span>1MHz<span class="pl-pds">'</span></span> --energy-modules=<span class="pl-s"><span class="pl-pds">'</span>cpu<span class="pl-pds">'</span></span> --thres-low=5000 --thres-high=10000 --energy-prof=./profile/energy_prof --energy-time-unit=10000000</pre></div>
+

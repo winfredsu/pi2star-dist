@@ -1,0 +1,28 @@
+<div class="content-sm container plain-content">
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<h1>Low-Power IoT</h1>
+			<div class="well">
+				<em>
+					The power consumption of trillions of devices has become a major challenge in the IoT era. Can nonvolatile processors save power for the IoT?
+				</em>
+			</div>
+			<!--<div class="embed-responsive embed-responsive-16by9 margin-b-30">-->
+          <!--<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/UaXRcAYKol8"></iframe>-->
+			<!--</div>-->
+			<p>Quite a lot of IoT devices serve as remote sensors which collect physical data from their surrounding environment. Usually these remote sensors are located in far away or dangerous places, and work in a "normally-off" pattern. They have no need for high performance or data throughput, but requires extremely long battery life because changing or recharging batteries will be costly! </p> 
+			<div class="figure">
+				<img class="img-responsive img-center" src="assets/showcase/normally-off.png" alt="Normally-off requres low standby power">
+				<div class="caption">Figure 1: Energy analysis of normally-off IoT devices</div>
+			</div>
+			<p>For such applications, the processor's leakage power becomes the main limiting factor to battery life. This is because they stay in standby mode in more than 99% of the time (Figure 1). Here we assume the standby power is 1uW and the active power is 1mW, while the sensor node senses data (which takes ~1ms) once every 10 seconds. We can calculate that for every cycle (10s), the sensing activity costs 1mW * 1ms = 1uJ energy, but the standby mode costs 1uW * 10s = 10uJ! That is to say, more than 90% of total energy is wasted on the standby mode.</p>
+			<p>Fortunately, nonvolatile processor is an ideal choice for normally-off applications thanks to its <strong>literally-zero standby power</strong>. It executes sensing tasks when needed, and standby at zero cost in the rest of the time. In this way, nonvolatile processor helps normally-off IoT devices save precious energy and extend their service life</p> 
+			<div class="figure">
+				<img class="img-responsive img-center" src="assets/showcase/bridge.png" alt="A bridge health monitoring system using nonvolatile processor based sensor node">
+				<div class="caption">Figure 2: A bridge health monitoring system using nonvolatile processor based sensor node</div>
+			</div>
+			<p>Figure 2 shows a normally-off bridge health monitoring system using nonvolatile processor based sensor nodes. The total energy is expected to be reduced by 40% thanks to the zero standby power of nonvolatile processor. </p>
+
+		</div>
+	</div>
+</div>

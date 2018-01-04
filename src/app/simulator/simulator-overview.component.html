@@ -1,0 +1,17 @@
+<h2>Welcome to the gem5-NVP!</h2>
+<p>To learn how to download, build, and use gem5-NVP, please visit <a routerLink="/simulator/getting-started">GETTING STARTED</a>.</p>
+<p>For more information about the concepts and structure of gem5-NVP to acheive a custom usage, please visit <a routerLink="/simulator/concept-and-structure">CONCEPT &amp; STRUCTURE</a>.</p>
+<p>Page <a routerLink="/simulator/example">EXAMPLE</a> provides an example of simulating a single-cycle MCU with a 2-thres energy state machine.</p>
+<p>If you have questions, feel free to send email to <a href="mailto:lf-zhang13@mails.tsinghua.edu.cn">lf-zhang13@mails.tsinghua.edu.cn</a>.</p>
+
+
+<h2>
+<a id="user-content-what-is-gem5-nvp" class="anchor" href="#what-is-gem5-nvp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is gem5-NVP?</h2>
+<p>Gem5-NVP is a simulating tool based on gem5 simulator. At the very beginning, it is designed to simulate nonvolatile systems. However, currently, it is proved to have capability of simulating all kinds of energy-aware behaviors, such as dynamic frequency according to energy remained, multi-level sleep behavior, etc.</p>
+<h2>
+<a id="user-content-what-features-does-gem5-nvp-have" class="anchor" href="#what-features-does-gem5-nvp-have" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What features does gem5-NVP have?</h2>
+<p>Gem5-NVP provides each SimObject in gem5 the ability to consume energy and give respond to system's energy state changes. It also enables SimObjects to transfer energy to each other through a module called "Energy Port". Moreover, gem5-NVP provides a basic class for energy state controller in real energy-aware systems, named "EnergyMgmt". Users can use the interfaces of it to simulate custom power control behavior.</p>
+<h2>
+<a id="user-content-how-does-gem5-nvp-achieve-these-functions" class="anchor" href="#how-does-gem5-nvp-achieve-these-functions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How does gem5-NVP achieve these functions?</h2>
+<p>Gem5-NVP brings a new parent class to gem5's SimObject called "EnergyObject". EnergyObject has energy ports to transfer energy to other EnergyObjects, and also gives some interfaces to SimObject for consuming energy and responding to energy state changes.</p>
+<p>Gem5-NVP introduces a new module (SimObject) in the system, named EnergyMgmt, as the power controller of the whole system. It communicates with other SimObjects through "Energy Ports". EnergyMgmt module handles the state changes of the whole system as well as the way the system harvests energy from external environment.</p>

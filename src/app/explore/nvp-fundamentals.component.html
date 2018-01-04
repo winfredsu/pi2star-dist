@@ -1,0 +1,50 @@
+<div class="content-sm container plain-content">
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<h1>NVP Fundamentals</h1>
+			<div class="well">
+				<em>
+					New to nonvolatile processors? Don't worry, we'll help you understand the fundamentals within just a few minutes. Get started now and make yourself an NVP-pro!
+				</em>
+			</div>
+			<div class="figure">
+				<img class="img-responsive" src="assets/explore/1.jpg" alt="Desired features of IoT processor">
+				<div class="caption">Figure 1: Four desired features of IoT processor</div>
+			</div>
+			<p>Before we dive into nonvolatile processors in detail, let's start with a higher-level question: <strong>what are the desired features of processors in IoT edge devices?</strong> This question is quite important because the processor acts as the "brain" of IoT devices and handles most of the computation and control tasks. As shown in Figure 1, we identify four features that an IoT processor should possess:</p>
+			<ul>
+				<li><strong>Ultra-low power:</strong> The power envelopes for IoT edge devices are relatively small, and what's even worse, we have to reserve a large portion of power for wireless data transmission. For this reason, the processor must have ultra-low power consumption in both active and idle states.  </li>
+				<li><strong>Micro-size:</strong> A micro-sized form factor is highly desired in use cases such as implantable devices and "smart dust".  </li>
+				<li><strong>Rapid response:</strong> In most of the time IoT processors stay in idle or off state, until an external event switch them to active mode. The switching cost must be minimized so that the precious energy can be reserved for userful task execution.</li>
+				<li><strong>High reliability:</strong> When IoT becomes more ingrained in our daily life, its reliability and security will be a serious concern. Imagine what would happen if our health and lives is hacked via wearable or implantable devices! </li>
+			</ul>	
+			<div class="figure">
+				<img class="img-responsive" src="assets/explore/2.jpg" alt="Limitations of conventional processor">
+				<div class="caption">Figure 2: Limitations of conventional processor</div>
+			</div>
+			<p>Unfortunately, conventional processors can hardly satisfy those requirements, as shown in Figure 2. The volatile nature of CMOS circuitry &mdash; <strong>"No power, no data"</strong> &mdash; becomes a fundamental limitation for IoT devices to achieve desirable power, size, reliability and response speed. </p>
+			<ul>
+				<li><strong>Power:</strong> As semiconductor feature size shrinks, static (leakage) power has exceeded dynamic power and dominates the total power consumption. Conventional processors have to consume pretty high leakage current to retain data, which results in a even tighter power budget for useful task execution. </li> 
+				<li><strong>Size:</strong> Conventional processors adopt batteries as main power supply. Even in energy harvesting scenarios, they still need off-chip energy storages to mitigate the variance of ambient energy. Those energy storage devices severely limits the miniaturization of the entire system. </li>
+				<li><strong>Response speed:</strong> One way to mitigate the leakage power issue is to store the system states into nonvolatile memory (e.g., on-chip Flash) when switching from active to idle or off state. However, reading or writing the nonvolatile memories is time and energy consuming, which slows down the system's response speed and degrades its energy efficiency. </li>
+				<li><strong>Reliability:</strong> Since CMOS logic can nolonger keep data if power supply disappears, conventionaly processors are vulnerable to unexpected power failures as well as intended power glitch attacks. </li>
+			</ul>
+			<div class="figure">
+				<img class="img-responsive" src="assets/explore/3.jpg" alt="Nonvolatile processor: no power, no problem!">
+				<div class="caption">Figure 3: Nonvolatile processor: no power, no problem!</div>
+			</div>
+			<p>The limitations discussed above motivate us to add non-volatility to standard CMOS logic. To do this, we combine the emerging nonvolatile memory technology with CMOS circuitry. As Figure 3 shows, each flip-flop in the processor is attached with a nonvolatile memory element, and a read/write driver helps to manage the data transfer between nonvolatile memory and the volatile flip-flop. When the processor runs in active mode, the nonvolatile memory is disconnected from the CMOS flip-flop, thus the processor's performance is not affected. When a power failure is about to come or the processor decides to enter standby mode, the nonvolatile memory element will take over the data held in CMOS flip-flop. In this way, the processor features bit-level non-volatility, and doesn't need any power for data retention.  <strong>And that's exactly what a nonvolatile processor is &mdash; no power? no problem!</strong></p> 
+			<div class="figure">
+				<img class="img-responsive" src="assets/explore/4.jpg" alt="Benefits of nonvolatile processor">
+				<div class="caption">Figure 4: Benefits of nonvolatile processor</div>
+			</div>
+			<p>Finally, let's see how nonvolatile processor brings benefits to the iot. </p>
+			<ul>
+				<li><strong>Zero standby power: </strong>Nonvolatile processor achieves literally-zero power in standby mode, which is expected most of the time. That is to say, they save a lot of "otherwise wasted" energy for the IoT.</li>
+				<li><strong>Micro size: </strong> Unlike traditional processors, nonvolatile ones can guarantee continuous task execution progress even with intermittent power supply. As a result, they allow energy harvesting IoT systems to be storage-less, and therefore, size-minimized.  
+				<li><strong>Rapid response: </strong>Since nonvolatile processor features bit-level non-volatility, the data backup and restore operations can be finished within just one or two clock cycles. High response speed to external events can be achieved while the on/off switching overheads are trivial.</li>
+				<li><strong>Resilience to power failure: </strong>In the event of a sudden power failure or a power glitch attack, nonvolatile processor will automatically save the volatile data to nonvolatile memory elements, which enhances the reliability of IoT devices. </li>	
+			</ul>
+		</div>
+	</div>
+</div>

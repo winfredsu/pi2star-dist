@@ -1,0 +1,21 @@
+<div class="content-sm container plain-content">
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<h1>Self-Powered Wearables</h1>
+			<div class="well">
+				<em>
+				Respiration rate (rate of breathing) is a primary vital sign that indicates human body's functions. Meanwhile, breathing generates distance movement, which can be collected as energy. Can we monitor breathing condition using breathing energy?
+				</em>
+			</div>
+			<div *ngIf="!ipFromCN" class="embed-responsive embed-responsive-16by9 margin-b-30">
+    			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/jK77uDYnLV4"></iframe>
+			</div>
+			<div *ngIf="ipFromCN" class="embed-responsive embed-responsive-16by9 margin-b-30">
+    			<iframe class="embed-responsive-item" src="https://www.bilibili.com/html/html5player.html?aid=14427876&cid=23539211&as_wide=1&autoplay=1&showinfo=0"></iframe>
+			</div>
+			<p>Breathing generates distance movement, which can be collected as energy. These energy can be utilized to measure the frequency of breathing, and even heart-rate and pulse oximeter. There's a wide range of applications such as wearable devices for babies, pregnants and fitness people. </p>
+			<p>However, one of the most challenging thing about monitoring breathing with breathing power is that <strong>the power is neither stable nor continuous</strong>. Using conventional microprocessors in such systems will lead to an unfortunate dilemma: the frequent power outage will destroy all intermediate data in the processor, while storing all those data into Flash memory is both energy and time consuming. </p> 
+			<p>Fortunately, nonvolatile processor makes it possible to survive a power failure at negligible time and energy cost. This demo video shows a self-powered breath monitoring system consisting of a breath energy harvester (from Tahzib Safwat @ Penn State University), a nonvolatile processor and a LCD screen. The screen shows pulsed data including averaged breathing frequency and last time breath frequency. The higher 2 bits of LCD screen stand for average breathing frequency calculated through past 3 times breathing intervals. The lower 2 bits stand for the last time breathing frequency. An "L" indicates your breathing is too slow (&#60;12 times/min), and an "H" indicates too high breathing frequency (&#62;48 times/min).</p>
+		</div>
+	</div>
+</div>
