@@ -335,6 +335,10 @@ fieldset[disabled] .btn-theme {
   margin-bottom: 0;
 }
 
+.footer .copyright {
+	text-align: center;
+}
+
 /*------------------------------------------------------------------
     [Header]
 ------------------------------------------------------------------*/
@@ -679,7 +683,7 @@ fieldset[disabled] .btn-theme {
 
 .carousel-home {
   position: relative;
-  background-image: url('assets/1920x1080/01.jpg');
+  background-image: url('assets/1920x1080/03.jpg');
   /*overflow: hidden;*/
 }
 

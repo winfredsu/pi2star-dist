@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 declare var $: any;
 
 @Component({
@@ -19,7 +19,7 @@ export class PlatformComponent implements OnInit {
 	@ViewChild('intro') elIntro: ElementRef;
 	@ViewChild('nav') elNav: ElementRef;
 	@ViewChild('titleWrapper') elTitleWrapper: ElementRef;
-	constructor(title: Title, public dialog: MdDialog) {
+	constructor(title: Title, public dialog: MatDialog) {
 		title.setTitle('Platform | NVLabs');
 	}
 
@@ -91,7 +91,7 @@ export class PlatformComponent implements OnInit {
 })
 export class BuyNowDialog {
 	constructor(
-		public dialogRef: MdDialogRef<BuyNowDialog>,
+		public dialogRef: MatDialogRef<BuyNowDialog>,
 	){}
 }
 

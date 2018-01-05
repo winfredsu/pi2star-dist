@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener, Inject, Input, OnDestroy  } from '@angular/core';
 import { DOCUMENT, Title } from '@angular/platform-browser';
 import { AppComponent } from '../app.component';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { IpFromCNService } from '../ip-from-cn.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { IpFromCNService } from '../ip-from-cn.service';
 export class HomeComponent implements OnInit, OnDestroy {
 	height: number;
 	constructor(
-		public dialog: MdDialog,
+		public dialog: MatDialog,
 		private ipFromCNService: IpFromCNService,
 		@Inject(DOCUMENT) private document: Document,
 		@Input('AppComponent') private appComponent: AppComponent, 
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 })
 export class NVPOneMinuteDialog {
 	  constructor(
-    public dialogRef: MdDialogRef<NVPOneMinuteDialog>,
+    public dialogRef: MatDialogRef<NVPOneMinuteDialog>,
     ){}
 }
 
@@ -79,6 +79,6 @@ export class NVPOneMinuteDialog {
 })
 export class NVPOneMinuteDialogCN {
 	  constructor(
-    public dialogRef: MdDialogRef<NVPOneMinuteDialogCN>,
+    public dialogRef: MatDialogRef<NVPOneMinuteDialogCN>,
     ){}
 }

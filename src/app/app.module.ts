@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AgmCoreModule } from '@agm/core';
-import { MdDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
 import { HttpModule } from '@angular/http';
 
 import { AffixDirective } from './affix.directive';
@@ -20,7 +20,7 @@ import { TermsComponent } from './terms/terms.component';
 
 @NgModule({
 	imports: [
-		MdDialogModule,
+		MatDialogModule,
 		BrowserModule,
 		HttpModule,
 		AppRoutingModule,
