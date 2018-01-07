@@ -11,9 +11,8 @@ declare var AMap: any;
 })
 export class AboutComponent implements OnInit {
 	ipFromCN: boolean=false;
-
-	lat: number = 40.010938;
-	lng: number = 116.347826;
+	lat: number = 40.113126;
+	lng: number = 116.629632;
 	zoom: number = 13;
   styleArray = [{
       featureType: "all",
@@ -40,7 +39,7 @@ export class AboutComponent implements OnInit {
 		private ipFromCNService: IpFromCNService,
 		title: Title
 		) {
-		title.setTitle('About | NVLabs');
+		title.setTitle('关于我们 | 集能芯成');
 	}
 
 	ngOnInit(): void {
@@ -48,7 +47,7 @@ export class AboutComponent implements OnInit {
 
 		let amap = new AMap.Map('map-cn',{
 	    zoom: 13,
-	    center: [116.347826,40.010938]//new AMap.LngLat(116.39,39.9)
+	    center: [116.629632,40.113126]//new AMap.LngLat(116.39,39.9)
 		});
 		let marker = new AMap.Marker({
 			map: amap
