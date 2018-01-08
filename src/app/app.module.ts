@@ -11,7 +11,7 @@ import { IpFromCNService } from './ip-from-cn.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent, NVPOneMinuteDialog, NVPOneMinuteDialogCN } from './home/home.component';
-import { PlatformComponent, PlatformOverviewComponent, PlatformTechspecsComponent, PlatformGettingStartedComponent, PlatformDownloadsComponent, BuyNowDialog } from './platform/platform.component';
+import { SolutionComponent } from './solution/solution.component';
 import { SimulatorComponent, SimulatorOverviewComponent, SimulatorGettingStartedComponent, SimulatorConceptAndStructureComponent, SimulatorExampleComponent } from './simulator/simulator.component';
 import { ShowcaseComponent, SelfPoweredWearablesComponent, TransientComputingComponent, LowPowerIoTComponent } from './showcase/showcase.component';
 import { ExploreComponent, RecommendedReadingComponent, NVPFundamentalsComponent } from './explore/explore.component';
@@ -36,12 +36,7 @@ import { TermsComponent } from './terms/terms.component';
 		HomeComponent,
 		NVPOneMinuteDialog,	
 		NVPOneMinuteDialogCN,
-		PlatformComponent,
-		BuyNowDialog,
-		PlatformOverviewComponent,
-		PlatformTechspecsComponent,
-		PlatformDownloadsComponent,
-		PlatformGettingStartedComponent, 
+		SolutionComponent,
 		SimulatorComponent,
 		SimulatorOverviewComponent,
 		SimulatorGettingStartedComponent,
@@ -62,8 +57,7 @@ import { TermsComponent } from './terms/terms.component';
 	],
 	entryComponents: [
 	NVPOneMinuteDialog,
-	NVPOneMinuteDialogCN,
-	BuyNowDialog,
+	NVPOneMinuteDialogCN
 	],
 	bootstrap: [AppComponent]
 })

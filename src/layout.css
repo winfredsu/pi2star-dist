@@ -15,7 +15,7 @@ p {
   font-size: 15px;
   font-weight: 400;
   font-family: Lato, sans-serif;
-  color: #999caa;
+  color: #727272;
   line-height: 1.8;
   margin-bottom: 15px;
 }
@@ -683,7 +683,7 @@ fieldset[disabled] .btn-theme {
 
 .carousel-home {
   position: relative;
-  background-image: url('assets/1920x1080/03.jpg');
+  background-image: url('assets/1920x1080/01.jpg');
   /*overflow: hidden;*/
 }
 
@@ -1356,10 +1356,24 @@ fieldset[disabled] .btn-theme {
     transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
 }
 
+.solution-content {
+  margin-bottom: 60px;
+}
+
+.solution-image {
+  margin-bottom: 60px;
+}
+
+.solution-image img {
+  max-height: 340px;
+}
+
 .solution-content p {
 	font-size: 20px;
-	line-height: 1.6;
+	line-height: 1.8;
 }
+
+
 
 .platform-carousel img {
     width: 100%;

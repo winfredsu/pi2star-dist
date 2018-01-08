@@ -6,7 +6,7 @@ declare var AMap: any;
 
 @Component({
 	moduleId: module.id,
-	selector: 'nvlabs-about',
+	selector: 'pi2star-about',
 	templateUrl: './about.component.html'
 })
 export class AboutComponent implements OnInit {
@@ -47,7 +47,8 @@ export class AboutComponent implements OnInit {
 
 		let amap = new AMap.Map('map-cn',{
 	    zoom: 13,
-	    center: [116.629632,40.113126]//new AMap.LngLat(116.39,39.9)
+	    center: [116.629632,40.113126],//new AMap.LngLat(116.39,39.9)
+	    mapStyle: 'amap://styles/macaron'
 		});
 		let marker = new AMap.Marker({
 			map: amap
