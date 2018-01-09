@@ -318,8 +318,9 @@ fieldset[disabled] .btn-theme {
   width: 120px;
   height: auto;
 	position: absolute;
-	top: 60px;
+	top: 0px;
 	right: 0px;
+  margin-right: 15px;
 }
 
 .footer .footer-list {
@@ -337,6 +338,7 @@ fieldset[disabled] .btn-theme {
 
 .footer .copyright {
 	text-align: center;
+  word-break: keep-all;
 }
 
 /*------------------------------------------------------------------
@@ -689,7 +691,7 @@ fieldset[disabled] .btn-theme {
 
 .carousel-centered {
   position: absolute;
-  top: 50%;
+  top: 48%;
   -webkit-transform: translate3d(0, -50%, 0);
   -moz-transform: translate3d(0, -50%, 0);
   transform: translate3d(0, -50%, 0);
@@ -735,6 +737,84 @@ fieldset[disabled] .btn-theme {
 	}
 }
 
+/*------------------------------------------------------------------
+    [Accordion]
+------------------------------------------------------------------*/
+.accordion .panel-default {
+  border: none;
+}
+
+.accordion .panel-heading {
+  border-radius: 0;
+}
+
+.accordion .panel-default > .panel-heading {
+  color: #515769;
+  background: #eeeeee;
+  border: none;
+  padding: 0;
+}
+
+.accordion .panel-default > .panel-heading:hover {
+  color: #ffffff !important;
+  background: #13b1cd;
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+
+.accordion .panel-title {
+  font-size: 22px;
+  padding: 30px 50px;
+  position: relative;
+}
+
+.accordion .panel-title span {
+  position: absolute;
+  top: 38px;
+  right: 60px;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.accordion .panel-group .panel + .panel {
+  border-radius: 0;
+  margin-top: 10px;
+}
+
+.accordion .panel-default > .panel-heading + .panel-collapse > .panel-body {
+  font-size: 16px;
+  border-top: none;
+  padding: 0 50px 20px 50px;
+  margin-top: -1px;
+}
+
+.accordion [aria-expanded="true"]{
+  color: #515769;
+  background: #eeeeee;
+}
+
+.accordion [aria-expanded="true"] span{
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.accordion .panel-body {
+  line-height: 1.8;
+}
+
+.accordion .panel-body h5 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.accordion .panel-body p {
+  margin-top: 20px;
+}
 
 /*------------------------------------------------------------------
   	[Text Colors]
@@ -764,7 +844,7 @@ fieldset[disabled] .btn-theme {
 }
 
 .color-sky-light {
-  color: #fafafa !important;
+  color: #f4f4f4 !important;
 }
 
 /*------------------------------------------------------------------
