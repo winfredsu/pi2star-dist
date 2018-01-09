@@ -6,7 +6,7 @@ import { IpFromCNService } from '../ip-from-cn.service';
 
 @Component({
 	moduleId: module.id,
-	selector: 'nvlabs-home',
+	selector: 'pi2star-home',
 	templateUrl: './home.component.html'
 	// styleUrls: ['./app.component.css']	
 })
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 		@Inject(DOCUMENT) private document: Document,
 		@Input('AppComponent') private appComponent: AppComponent, 
 		private title: Title) {
-		title.setTitle('NVLabs');
+		title.setTitle('集能芯成');
 	}
 
 	@HostListener('window:scroll', [])

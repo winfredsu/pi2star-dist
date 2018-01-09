@@ -8,7 +8,7 @@ declare var $: any;
 
 @Component({
 	moduleId: module.id,
-	selector: 'nvlabs-app',
+	selector: 'pi2star-app',
 	templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {

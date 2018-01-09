@@ -15,7 +15,7 @@ p {
   font-size: 15px;
   font-weight: 400;
   font-family: Lato, sans-serif;
-  color: #999caa;
+  color: #727272;
   line-height: 1.8;
   margin-bottom: 15px;
 }
@@ -683,7 +683,7 @@ fieldset[disabled] .btn-theme {
 
 .carousel-home {
   position: relative;
-  background-image: url('assets/1920x1080/03.jpg');
+  background-image: url('assets/1920x1080/01.jpg');
   /*overflow: hidden;*/
 }
 
@@ -733,6 +733,50 @@ fieldset[disabled] .btn-theme {
 	.carousel-btn {
 		padding: 10px 25px;
 	}
+}
+
+/*------------------------------------------------------------------
+    [Accordion]
+------------------------------------------------------------------*/
+.accordion .panel-default {
+  border: none;
+}
+
+.accordion .panel-heading {
+  border-radius: 0;
+}
+
+.accordion .panel-default > .panel-heading {
+  color: #515769;
+  background: #fff;
+  border: none;
+  padding: 0;
+}
+
+.accordion .panel-title {
+  font-size: 22px;
+}
+
+.accordion .panel-title-child {
+  display: block;
+  padding: 30px;
+}
+
+.accordion .panel-group .panel + .panel {
+  border-radius: 0;
+  margin-top: 10px;
+}
+
+.accordion .panel-default > .panel-heading + .panel-collapse > .panel-body {
+  font-size: 16px;
+  border-top: none;
+  padding: 0 30px 30px 30px;
+  margin-top: -1px;
+}
+
+.accordion [aria-expanded="true"]{
+  color: #fff;
+  background: #17bed2;
 }
 
 
@@ -1356,10 +1400,24 @@ fieldset[disabled] .btn-theme {
     transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
 }
 
+.solution-content {
+  margin-bottom: 60px;
+}
+
+.solution-image {
+  margin-bottom: 60px;
+}
+
+.solution-image img {
+  max-height: 340px;
+}
+
 .solution-content p {
 	font-size: 20px;
-	line-height: 1.6;
+	line-height: 1.8;
 }
+
+
 
 .platform-carousel img {
     width: 100%;

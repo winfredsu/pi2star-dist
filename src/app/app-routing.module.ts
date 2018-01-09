@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { PlatformComponent, PlatformOverviewComponent, PlatformTechspecsComponent, PlatformGettingStartedComponent, PlatformDownloadsComponent } from './platform/platform.component';
+import { SolutionComponent } from './solution/solution.component';
 import { SimulatorComponent, SimulatorOverviewComponent, SimulatorGettingStartedComponent, SimulatorConceptAndStructureComponent, SimulatorExampleComponent } from './simulator/simulator.component';
 import { ShowcaseComponent, SelfPoweredWearablesComponent, TransientComputingComponent, LowPowerIoTComponent } from './showcase/showcase.component';
 import { ExploreComponent, RecommendedReadingComponent, NVPFundamentalsComponent } from './explore/explore.component';
@@ -10,14 +10,7 @@ import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
 	{ path: 'home', component: HomeComponent },
-	{ path: 'platform', component: PlatformComponent,
-		children: [
-			{ path: '', redirectTo: 'overview', pathMatch: 'full' },
-			{ path: 'overview', component: PlatformOverviewComponent },
-			{ path: 'getting-started', component: PlatformGettingStartedComponent },
-			{ path: 'techspecs', component: PlatformTechspecsComponent },
-			{ path: 'downloads', component: PlatformDownloadsComponent },
-		]	
+	{ path: 'solution', component: SolutionComponent,	
 	},
 	{ path: 'simulator', component: SimulatorComponent,
 		children: [
