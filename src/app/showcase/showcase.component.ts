@@ -5,13 +5,13 @@ import { IpFromCNService } from '../ip-from-cn.service';
 
 @Component({
 	moduleId: module.id,
-	selector: 'nvlabs-showcase',
+	selector: 'pi2star-showcase',
 	templateUrl: './showcase.component.html'
 })
 export class ShowcaseComponent {
 	constructor( router: Router, title: Title ) {
 		if ( router.url === '/showcase') {
-			title.setTitle('Showcase | NVLabs');
+			title.setTitle('行业应用 | 集能芯成');
 		}
 	}	
 }

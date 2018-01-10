@@ -2,19 +2,16 @@ import { Component, OnInit, HostListener, Inject, Input, OnDestroy  } from '@ang
 import { DOCUMENT, Title } from '@angular/platform-browser';
 import { AppComponent } from '../app.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { IpFromCNService } from '../ip-from-cn.service';
 
 @Component({
 	moduleId: module.id,
 	selector: 'pi2star-home',
 	templateUrl: './home.component.html'
-	// styleUrls: ['./app.component.css']	
 })
 export class HomeComponent implements OnInit, OnDestroy {
 	height: number;
 	constructor(
 		public dialog: MatDialog,
-		private ipFromCNService: IpFromCNService,
 		@Inject(DOCUMENT) private document: Document,
 		@Input('AppComponent') private appComponent: AppComponent, 
 		private title: Title) {
@@ -47,38 +44,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
   openDialog(): void {
-  	if (this.ipFromCNService.ipFromCN()) {
-  		let dialogRef = this.dialog.open(NVPOneMinuteDialogCN, {
+  		let dialogRef = this.dialog.open(IntroVideoDialog, {
 			width: '990px',
 			height: 'auto'
   		});
-  	} else {
-  		let dialogRef = this.dialog.open(NVPOneMinuteDialog, {
-			width: '990px',
-			height: 'auto'
-  		});
-  	}
 	}
 }
 
 @Component({
 	moduleId: module.id,
-	selector: 'nvp-one-minute-dialog',
-	templateUrl: './nvp-one-minute-dialog.html'
+	selector: 'intro-video',
+	templateUrl: './intro-video.html'
 })
-export class NVPOneMinuteDialog {
+export class IntroVideoDialog {
 	  constructor(
-    public dialogRef: MatDialogRef<NVPOneMinuteDialog>,
-    ){}
-}
-
-@Component({
-	moduleId: module.id,
-	selector: 'nvp-one-minute-dialog-cn',
-	templateUrl: './nvp-one-minute-dialog-cn.html'
-})
-export class NVPOneMinuteDialogCN {
-	  constructor(
-    public dialogRef: MatDialogRef<NVPOneMinuteDialogCN>,
+    public dialogRef: MatDialogRef<IntroVideoDialog>,
     ){}
 }

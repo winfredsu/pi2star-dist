@@ -6,17 +6,15 @@ import { AgmCoreModule } from '@agm/core';
 import { MatDialogModule } from '@angular/material';
 import { HttpModule } from '@angular/http';
 
-import { AffixDirective } from './affix.directive';
 import { IpFromCNService } from './ip-from-cn.service';
 
 import { AppComponent } from './app.component';
-import { HomeComponent, NVPOneMinuteDialog, NVPOneMinuteDialogCN } from './home/home.component';
+import { HomeComponent, IntroVideoDialog } from './home/home.component';
 import { SolutionComponent } from './solution/solution.component';
-import { SimulatorComponent, SimulatorOverviewComponent, SimulatorGettingStartedComponent, SimulatorConceptAndStructureComponent, SimulatorExampleComponent } from './simulator/simulator.component';
 import { ShowcaseComponent, SelfPoweredWearablesComponent, TransientComputingComponent, LowPowerIoTComponent } from './showcase/showcase.component';
-import { ExploreComponent, RecommendedReadingComponent, NVPFundamentalsComponent } from './explore/explore.component';
+import { JoinusComponent } from './joinus/joinus.component';
 import { AboutComponent } from './about/about.component';
-import { TermsComponent } from './terms/terms.component';
+
 
 @NgModule({
 	imports: [
@@ -30,34 +28,22 @@ import { TermsComponent } from './terms/terms.component';
 		})
 	],
 	declarations: [
-
-		AffixDirective,
 		AppComponent,
 		HomeComponent,
-		NVPOneMinuteDialog,	
-		NVPOneMinuteDialogCN,
+		IntroVideoDialog,	
 		SolutionComponent,
-		SimulatorComponent,
-		SimulatorOverviewComponent,
-		SimulatorGettingStartedComponent,
-		SimulatorConceptAndStructureComponent,
-		SimulatorExampleComponent,
 		ShowcaseComponent,
 		SelfPoweredWearablesComponent,
 		TransientComputingComponent,
 		LowPowerIoTComponent,
-		ExploreComponent,
-		NVPFundamentalsComponent,
-		RecommendedReadingComponent,
+		JoinusComponent,
 		AboutComponent,
-		TermsComponent,
 	],
 	providers: [
 		IpFromCNService
 	],
 	entryComponents: [
-	NVPOneMinuteDialog,
-	NVPOneMinuteDialogCN
+	IntroVideoDialog
 	],
 	bootstrap: [AppComponent]
 })

@@ -900,6 +900,7 @@ fieldset[disabled] .btn-theme {
 
 .content {
 	margin-top: 97px;
+  min-height: calc(100vh - 255px);
 }
 
 .content-xs {

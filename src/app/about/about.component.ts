@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { IpFromCNService } from '../ip-from-cn.service';
 declare var $: any;
@@ -10,6 +10,7 @@ declare var AMap: any;
 	templateUrl: './about.component.html'
 })
 export class AboutComponent implements OnInit {
+	@ViewChild('videoPlayer') videoplayer: ElementRef;
 	ipFromCN: boolean=false;
 	lat: number = 40.113126;
 	lng: number = 116.629632;
@@ -54,14 +55,18 @@ export class AboutComponent implements OnInit {
 			map: amap
 		});
 
-		$("#sponsor-list").owlCarousel({
-			loop: true,
-			margin: 50,
-			autoplay: true,
-			autoplayTimeout: 2500,
-			autoWidth: true,
-			items: 4
-		});
+		// $("#sponsor-list").owlCarousel({
+		// 	loop: true,
+		// 	margin: 50,
+		// 	autoplay: true,
+		// 	autoplayTimeout: 2500,
+		// 	autoWidth: true,
+		// 	items: 4
+		// });
+	}
+
+	toggleVideo() {
+		this.videoplayer.nativeElement.play();
 	}
 }
 

@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
 	moduleId: module.id,
-	selector: 'nvlabs-platform',
+	selector: 'pi2star-solution',
 	templateUrl: './solution.component.html'
 })
 export class SolutionComponent {
