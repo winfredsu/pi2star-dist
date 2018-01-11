@@ -588,7 +588,7 @@ fieldset[disabled] .btn-theme {
   }
   .header .nav-item-hover:after {
     position: absolute;
-    top: 19px;
+    top: 25px;
   	left: 2px;
   }
 }
@@ -1400,6 +1400,7 @@ fieldset[disabled] .btn-theme {
     font-weight: 400;
     letter-spacing: 1px;
 		font-size: 18px;
+    word-break: keep-all;
 }
 .showcase-item {
     position: relative;
@@ -1435,6 +1436,10 @@ fieldset[disabled] .btn-theme {
     transition-duration: 300ms;
     transition-property: all;
     transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.solution-title {
+  word-break: keep-all;
 }
 
 .solution-content {
@@ -1541,7 +1546,7 @@ fieldset[disabled] .btn-theme {
 
 .product-nav .nav-tabs > li a {
     padding-left: 20px;
-    padding-right: s0px;
+    padding-right: 0px;
 }
 
 .product-nav .nav-tabs > li.active a {
