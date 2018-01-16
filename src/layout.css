@@ -1920,7 +1920,7 @@ background:#f1c40f;
    100% { transform:scale(1); }
 }
 
-nvlabs-app:empty + #preloader {
+pi2star-app:empty + #preloader {
     opacity: 1;
     z-index: -1;
 }
